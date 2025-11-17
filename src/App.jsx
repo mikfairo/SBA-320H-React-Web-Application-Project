@@ -36,56 +36,68 @@ function App() {
   }
 
   // loops thru each url to display an image for each
-  return (
-    <div className="bg-black w-full h-full">
-      <button
-        className="bg-amber-500"
-        onClick={() => setViewingAvatars(!viewingAvatars)}
-      >
-        Choose your avatar
-      </button>
-      {/* if selecting an avatar is true than show the div with mapped images  */}
-      {viewingAvatars && (
-        <div className="grid grid-cols-3 w-fit mx-auto">
-          {randomUrls.map((url, i) => (
-            <img
-              onClick={() => {
-                setSelectedAvatar(url);
-                setViewingAvatars(!viewingAvatars);
-              }}
-              className=" w-24 h-24 bg-blue-50 object-cover border"
-              key={url + i}
-              src={url}
-            ></img>
-          ))}
-        </div>
-      )}
-      {selectedAvatar && (
-        <>
-          <h1 className="text-white">Your selected avatar</h1>
-          <img className="w-25 h-25" src={selectedAvatar} />
-        </>
-      )}
-      <form className="flex flex-col" action={publish}>
-        <textarea
-          className="border bg-blue-50 mx-auto"
-          name="content"
-          rows={4}
-          cols={40}
-        />
-        <br />
+ return (
+  <div className="bg-black w-full h-full">
+    <h1 className="text-white text-5xl text-center font-extrabold p-10 mb-20 caret-blink">
+      Messages from Anon
+    </h1>
+
+    {viewingAvatars && (
+      <div className="grid grid-cols-3 w-fit mx-auto mb-6">
+        {randomUrls.map((url, i) => (
+          <img
+            onClick={() => {
+              setSelectedAvatar(url);
+              setViewingAvatars(!viewingAvatars);
+            }}
+            className="w-24 h-24 bg-blue-50 object-cover border cursor-pointer"
+            key={url + i}
+            src={url}
+          />
+        ))}
+      </div>
+    )}
+
+    {selectedAvatar && (
+      <>
+        <h1 className="text-white text-center mb-2">Your selected avatar</h1>
+        <img className="w-25 h-25 mx-auto mb-6" src={selectedAvatar} />
+      </>
+    )}
+
+    <form className="flex flex-col items-center" action={publish}>
+      <textarea
+        className="border bg-blue-50 mx-auto"
+        name="content"
+        rows={4}
+        cols={40}
+        placeholder="Type your message here..."
+      />
+
+      <div className="flex gap-3 mt-3">
+
         <button
-          className="bg-lime-400 p-3 rounded shadow-2xl hover:bg-amber-600"
+          className="bg-amber-500 text-sm px-3 py-2 rounded shadow hover:bg-amber-600"
+          type="button"
+          onClick={() => setViewingAvatars(!viewingAvatars)}
+        >
+          Choose your avatar
+        </button>
+
+        <button
+          className="bg-lime-400 text-sm px-3 py-2 rounded shadow hover:bg-amber-600"
           type="submit"
           name="button"
           value="submit"
         >
           Publish
         </button>
-      </form>
-      <Messages />
-    </div>
-  );
+      </div>
+    </form>
+
+    <Messages />
+  </div>
+);
 }
 
 export default App;
