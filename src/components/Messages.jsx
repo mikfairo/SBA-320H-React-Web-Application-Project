@@ -7,14 +7,15 @@ export default function Messages() {
     
     useEffect(() => {
         console.log("A new message was added")
+        console.log(AllMessages)
     }, [AllMessages])
 
     return (
-        AllMessages.map((messageContent) => (
-            <>
-            <img src={messageContent[0]}/>
-            <h1>{messageContent[1]}</h1>
-            </>
+        AllMessages[0].map((messageContent) => (
+            <div className="bg-blue-50">
+            <h1>{messageContent[0]}</h1>
+            <img className=" w-25 h-25" src={messageContent[1]}/>
+            </div>
         ))
     )
 }
