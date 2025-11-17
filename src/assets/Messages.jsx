@@ -1,22 +1,20 @@
-import '../index.css'
+import { useContext, useEffect } from "react";
+import { MessagesContext } from "./MessagesContext";
 
 export default function Messages() {
-  function publish(formData) {
-    const content = formData.get("content");
-    const button = formData.get("button");
-  }
 
-  function save(formData) {
-    const content = formData.get("content");
-  }
+    const AllMessages = useContext(MessagesContext);
+    
+    useEffect(() => {
+        console.log("A new message was added")
+    }, [AllMessages])
 
-  return (
-    <form action={publish}>
-      <textarea className='border' name="content" rows={4} cols={40} />
-      <br />
-      <button className='bg-sky-700 p-8 rounded-2xl shadow-2xl shadow-cyan-600'type="submit" name="button" value="submit">
-        Publish
-      </button>
-    </form>
-  );
+    return (
+        AllMessages.map((messageContent) => (
+            <>
+            <img src={messageContent[0]}/>
+            <h1>{messageContent[1]}</h1>
+            </>
+        ))
+    )
 }
