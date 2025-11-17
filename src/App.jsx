@@ -30,9 +30,6 @@ function App() {
     AllMessages.push([selectedAvatar, content]);
   }
 
-  function save(formData) {
-    const content = formData.get("content");
-  }
   // loops thru each url to display an image for each
   return (
     <div className="bg-black w-full h-full">
