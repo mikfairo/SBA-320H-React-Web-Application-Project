@@ -1,16 +1,12 @@
-# React + Vite
+### Netlifly Website
+https://messages-from-anon.netlify.app/
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+### About 
+I was inspired by viral videos of strangers writing notes anonymously about a secret, a fear or something they are afraid to share and putting it in a jar. I thought it was very wholesome and wanted to create a platform/app where others can do the same 
+but online. Its a platform for judgment-free sharing. 
 
-Currently, two official plugins are available:
+## How It Works 
+Users write their message in the input field and are allowed to select a random avatar of a set of 9, obtained from the Dicebear API via random seed queries. There is a series of useStates and mapping to display image urls for toggling the avatar selection value and selected avatars. When a user has selected an avatar, typed into the textarea field, and clicks the "Publish" button, it pushes the text content to a thread at the bottom of the page, including their text content and selected avatar. 
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Unsolve problems and Future Add-Ons
+Currently, messages are not stored when the page is re-rendered, as Netlify does not support storage. But, I am considering using localStorage in the future to mitigate this! I plan to do further styling, add a word count to prevent users from writing essays. Instructions and an About/Mission statement section. To prevent too many submissions, I plan to add timer/time delay so the oldest submissions disappear after 3-5 days. There might be archive to display favorites, or top viewed, but it might be contradictory to the message I'm trying to convey--which us vulnerability and sharing something without judgement. 
