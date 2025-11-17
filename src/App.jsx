@@ -1,33 +1,38 @@
 import { useContext, useState } from "react";
 import "./index.css";
 import { useEffect } from "react";
-import { getRandomUrl } from "./assets/randomAvatars";
-import Messages from "./assets/Messages";
-import { MessagesContext } from "./assets/MessagesContext";
+import { getRandomUrl } from "./randomAvatars";
+import Messages from "./components/Messages";
+import { MessagesContext } from "./components/MessagesContext";
 
 function App() {
   const [randomUrls, setRandomUrls] = useState([]);
   const [viewingAvatars, setViewingAvatars] = useState(false); //to display the grid of images to select from
   const [selectedAvatar, setSelectedAvatar] = useState(); //for avatars to be selected
 
-  const AllMessages = useContext(MessagesContext);
+  const [allMessages, setAllMessages] = useContext(MessagesContext);
 
   useEffect(() => {
     //creates 9 images of random avatars
-    const urls = [];
-    for (let i = 0; i < 9; i++) {
-      const url = getRandomUrl();
-      urls.push(url);
-    }
+    
+    const fetchRandomUrls = async () => {
+      const urls = [];
+      for (let i = 0; i < 9; i++) {
+        const url = await getRandomUrl();
+        urls.push(url);
+      }
+      setRandomUrls(urls);
+    };
 
-    setRandomUrls(urls);
+    fetchRandomUrls()
   }, []);
 
   function publish(formData) {
     const content = formData.get("content");
     const button = formData.get("button");
-    console.log(content, selectedAvatar);
-    AllMessages.push([selectedAvatar, content]);
+    setAllMessages((messages) => [...messages, [content, selectedAvatar]]);
+
+    // AllMessages.push([selectedAvatar, content]); // cannot change context directly, turned all messages context into a usestate
   }
 
   // loops thru each url to display an image for each
@@ -57,8 +62,8 @@ function App() {
       )}
       {selectedAvatar && (
         <>
-          <h1>Your selected avatar</h1>
-          <img src={selectedAvatar} />
+          <h1 className="text-white">Your selected avatar</h1>
+          <img className="w-25 h-25" src={selectedAvatar} />
         </>
       )}
       <form className="flex flex-col" action={publish}>
